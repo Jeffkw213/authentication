@@ -15,9 +15,13 @@ export default function Page() {
   const [name, setName] = useState('')
   const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
-  
 
-  
+
+
+  function submitButton() {
+    console.log("submitted")
+  }
+
   return (
     <Card className="max-w-[400px]">
       <CardHeader className="flex gap-3">
@@ -36,14 +40,34 @@ export default function Page() {
       </CardHeader>
       <Divider />
       <CardBody>
-        <form action="" className='flex flex-col'>
-          <Input isRequired isClearable label="Username" />
+        <form onSubmit={submitButton} className='flex flex-col'>
+          <Input isRequired isClearable label="Username"
+            value={username}
+            onChange={(e) => { setUsername(e.target.value) }}
+            onClear={() => setUsername("")}
+          />
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 py-4">
-            <Input isRequired isClearable label="Name" />
-            <Input isRequired isClearable label="Last Name" />
+            <Input isRequired isClearable label="Name"
+              value={name}
+              onChange={(e) => { setName(e.target.value) }}
+              onClear={() => setName("")}
+            />
+            <Input isRequired isClearable label="Last Name"
+              value={last}
+              onChange={(e) => { setLast(e.target.value) }}
+              onClear={() => setLast("")}
+            />
           </div>
-          <Input isRequired isClearable label="Password" />
-          <Input isRequired isClearable onClear={() => console.log("input cleared")} className='py-4' type="email" label="Email" placeholder="Enter your email" />
+          <Input isRequired isClearable label="Password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value) }}
+            onClear={() => setPassword("")}
+          />
+          <Input isRequired isClearable className='py-4' type="email" label="Email" placeholder="Enter your email"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value) }}
+            onClear={() => setEmail("")}
+          />
           <Button type='submit' variant='shadow' color='primary'> <BsPersonPlus /> Sign Up </Button>
         </form>
       </CardBody>

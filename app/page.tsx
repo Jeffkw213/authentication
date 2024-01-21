@@ -8,7 +8,7 @@ export default function Page() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    function submitButton(){
+    function  submitButton(){
         console.log(`username: ${username}`)
         console.log(`password: ${password}`)
     }
