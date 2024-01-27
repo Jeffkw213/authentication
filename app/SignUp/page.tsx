@@ -7,6 +7,7 @@ import { BsPersonPlus } from "react-icons/bs";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { Link } from '@nextui-org/react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 
 export default function Page() {
@@ -16,10 +17,11 @@ export default function Page() {
   const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
 
+  const router = useRouter()
 
-
-  function submitButton() {
+  const submitButton = () => {
     console.log("submitted")
+    router.push('/')
   }
 
   return (
@@ -46,6 +48,8 @@ export default function Page() {
             onChange={(e) => { setUsername(e.target.value) }}
             onClear={() => setUsername("")}
           />
+
+          
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 py-4">
             <Input isRequired isClearable label="Name"
               value={name}
@@ -58,6 +62,7 @@ export default function Page() {
               onClear={() => setLast("")}
             />
           </div>
+
           <Input isRequired isClearable label="Password"
             value={password}
             onChange={(e) => { setPassword(e.target.value) }}

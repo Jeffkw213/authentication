@@ -8,9 +8,8 @@ export default function Page() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    function  submitButton(){
-        console.log(`username: ${username}`)
-        console.log(`password: ${password}`)
+    function submitButton() {
+        console.log(`username: ${username} password: ${password}`)
     }
     return (
         <Card>
@@ -19,7 +18,7 @@ export default function Page() {
                     alt="logo"
                     height={70}
                     radius="sm"
-                    src="./favicon.ico"
+                    src="/favicon.ico"
                     width={70}
                 />
                 <div className="flex flex-col">
@@ -30,17 +29,17 @@ export default function Page() {
             <Divider />
             <CardBody>
                 <form onSubmit={submitButton} className="flex flex-col">
-                    <Input isRequired isClearable className='pb-4' label="Username" placeholder=""  
-                    value={username}
-                    onChange ={(e)=>{setUsername(e.target.value)}}
-                    onClear={()=>{setUsername("")}}
+                    <Input isRequired isClearable className='pb-4' label="Username" placeholder=""
+                        value={username}
+                        onChange={(e) => { setUsername(e.target.value) }}
+                        onClear={() => { setUsername("") }}
                     />
-                    
 
-                    <Input isRequired isClearable className='pb-4' type="password" label="Password" 
-                    value={password}
-                    onChange ={(e)=>{setPassword(e.target.value)}}
-                    onClear={()=>{setPassword("")}}
+
+                    <Input isRequired isClearable className='pb-4' type="password" label="Password"
+                        value={password}
+                        onChange={(e) => { setPassword(e.target.value) }}
+                        onClear={() => { setPassword("") }}
                     />
 
 
