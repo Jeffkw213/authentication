@@ -19,9 +19,10 @@ export default function Page() {
 
   const router = useRouter()
 
-  const submitButton = () => {
-    console.log("submitted")
+  const submitButton = (e:any) => {
+    e.preventDefault();
     router.push('/')
+    console.log("submitted")
   }
 
   return (
@@ -73,7 +74,7 @@ export default function Page() {
             onChange={(e) => { setEmail(e.target.value) }}
             onClear={() => setEmail("")}
           />
-          <Button type='submit' variant='shadow' color='primary'> <BsPersonPlus /> Sign Up </Button>
+          <Button type='submit' variant='solid' color='primary'> <BsPersonPlus /> Sign Up </Button>
         </form>
       </CardBody>
       <Divider />

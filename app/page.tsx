@@ -3,13 +3,33 @@ import { Card, CardHeader, CardBody, Divider, Image, Link } from "@nextui-org/re
 import { Input } from "@nextui-org/react";
 import { Button } from '@nextui-org/button';
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
+
 export default function Page() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [userValid, setuserValid] = useState(false)
+    const router = useRouter()
 
-    function submitButton() {
+    const checkInDB = (username: String, password: String) => {
+        return false
+    }
+
+    const validUser = (username: String, password:String) =>{
+        
+        return false
+    }
+
+    function submitButton(e:any) {
+        e.preventDefault()
+        if (checkInDB(username, password)){
+            router.push(`./${username}`)
+        }else{
+            console.log("account not found")
+        }
         console.log(`username: ${username} password: ${password}`)
+
     }
     return (
         <Card>
@@ -31,6 +51,9 @@ export default function Page() {
                 <form onSubmit={submitButton} className="flex flex-col">
                     <Input isRequired isClearable className='pb-4' label="Username" placeholder=""
                         value={username}
+                        variant="bordered"
+                        isInvalid={userValid}
+                        errorMessage={userValid && "Please enter a valid email"}
                         onChange={(e) => { setUsername(e.target.value) }}
                         onClear={() => { setUsername("") }}
                     />
@@ -38,12 +61,15 @@ export default function Page() {
 
                     <Input isRequired isClearable className='pb-4' type="password" label="Password"
                         value={password}
+                        variant="bordered"
+                        isInvalid={false}
+                        errorMessage={userValid && "Please enter a valid email"}
                         onChange={(e) => { setPassword(e.target.value) }}
                         onClear={() => { setPassword("") }}
                     />
 
 
-                    <Button type='submit' variant='shadow' color='primary'> Sign In </Button>
+                    <Button type='submit' variant='solid' color='primary'> Sign In </Button>
                     <div className="flex items-center justify-center p-4"> <Link href="./SignUp"> NO ACCOUNT? NO PROBLEM </Link> </div>
                 </form>
             </CardBody>
