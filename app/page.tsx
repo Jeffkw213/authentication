@@ -4,28 +4,51 @@ import { Input } from "@nextui-org/react";
 import { Button } from '@nextui-org/button';
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import { fetchAccount } from "../libs/data";
+
 
 export default function Page() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [userValid, setuserValid] = useState(false)
+    const [passValid, setpassValid] = useState(false)
     const router = useRouter()
 
-    const checkInDB = (username: String, password: String) => {
+
+    const getAccount = async () => {
+        try {
+            const res = await fetch("")
+            if (!res.ok) {
+                throw Error("hello")
+            }
+
+            return res.json()
+        } catch {
+        }
+    }
+
+    const validUser = (username: String, password: String) => {
+        //if username exists in database: 
+        // check if the the password is correct
+        if (true) {
+            if (true) {
+                return true
+            }
+            setpassValid(true)
+        }
+        setuserValid(true)
         return false
     }
 
-    const validUser = (username: String, password:String) =>{
-        
+    const correctPass = (username: String, password: String) => {
         return false
     }
-
-    function submitButton(e:any) {
+    function submitButton(e: any) {
         e.preventDefault()
-        if (checkInDB(username, password)){
+        if (validUser(username, password)) {
             router.push(`./${username}`)
-        }else{
+        } else {
             console.log("account not found")
         }
         console.log(`username: ${username} password: ${password}`)
@@ -62,8 +85,8 @@ export default function Page() {
                     <Input isRequired isClearable className='pb-4' type="password" label="Password"
                         value={password}
                         variant="bordered"
-                        isInvalid={false}
-                        errorMessage={userValid && "Please enter a valid email"}
+                        isInvalid={passValid}
+                        errorMessage={passValid && "Please enter a valid email"}
                         onChange={(e) => { setPassword(e.target.value) }}
                         onClear={() => { setPassword("") }}
                     />
