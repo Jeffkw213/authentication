@@ -4,8 +4,29 @@ import { Input } from "@nextui-org/react";
 import { Button } from '@nextui-org/button';
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { fetchAccount } from "../libs/data";
 
+
+// save accounts that are logged in local. Website needs to know who is logged in.
+
+const getAccount = async (username: string) => {
+    console.log(`SEARCHING FOR ${username}`)
+    try {
+        const findAccount = await fetch('/api/accounts?' + new URLSearchParams(
+            {
+                username
+            }), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+        }).then((res) => res.json())
+        console.log(findAccount.account.first)
+
+    } catch (Error) {
+        console.log(Error)
+    }
+}
 
 export default function Page() {
 
@@ -16,17 +37,6 @@ export default function Page() {
     const router = useRouter()
 
 
-    const getAccount = async () => {
-        try {
-            const res = await fetch("")
-            if (!res.ok) {
-                throw Error("hello")
-            }
-
-            return res.json()
-        } catch {
-        }
-    }
 
     const validUser = (username: String, password: String) => {
         //if username exists in database: 
@@ -54,6 +64,7 @@ export default function Page() {
         console.log(`username: ${username} password: ${password}`)
 
     }
+    getAccount("user1")
     return (
         <Card>
             <CardHeader className="flex gap-3 w-96">

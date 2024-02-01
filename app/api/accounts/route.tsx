@@ -1,18 +1,27 @@
 // Public method and everyone can get access to this api
 
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import Account from "@/libs/account"
 import connectMongoDB from "@/libs/mongodb"
 /**
  * @param req :searching for the user name 
  * @returns NextResponse.json
- */
-export async function findAccount(req: any) {
+ * 
+ * URL Params use of Error handling
+ */ 
+export async function GET(req: NextRequest) {
     // await new Promise(resolve => setTimeout(resolve, 2000));
-    const { username } = await req.json()
+    // console.log(req)
+    const searchParams = req.nextUrl.searchParams
+    const username = searchParams.get('username') 
+    if (!username){
+        return NextResponse.json({ error: 'Bad Request' }, { status: 400 })
+    }
+    console.log(username)
     await connectMongoDB()
-    const accounts = await Account.findOne({ username })
-    return NextResponse.json({ accounts }, { status: 200 })
+    const account = await Account.findOne({ username })
+    if (!account) {return NextResponse.json({ error: 'User Not Found' }, { status: 404 })}
+    return NextResponse.json({ account }, { status: 200 })
 }
 /**
  * 
@@ -20,8 +29,8 @@ export async function findAccount(req: any) {
  * @returns NextResponse.json
  */
 
-export async function addAccount(req: any) {
-    const { first, last, email, password, username } = await req.json()
+export async function POST(req: Request) {
+    const { username, first, last, email, password  } = await req.json()
     await connectMongoDB()
     await Account.create({
         username,
