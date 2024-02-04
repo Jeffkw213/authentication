@@ -55,6 +55,7 @@ export default function Page() {
         e.preventDefault()
         const user = await getAccount(username)
         try {
+            
             setuserValid(false)
             if (user.account.password != password) {
                 setpassValid(true)
@@ -63,6 +64,8 @@ export default function Page() {
                 router.push( `./${username}`)
             }
             console.log(user.account.password)
+
+            //error 404 user does not exist in the database
         } catch (error) {
             setuserValid(true)
             console.log("username not found")

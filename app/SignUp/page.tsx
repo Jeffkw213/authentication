@@ -9,6 +9,7 @@ import { Link } from '@nextui-org/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+const URL = "http://localhost:3000/"
 
 export default function Page() {
   const [username, setUsername] = useState('')
@@ -20,27 +21,46 @@ export default function Page() {
   const [dup, setdup] = useState(false)
 
   const router = useRouter()
-  const checkDuplicates = async (username: String) => {
+  /**
+   * 
+   * @param username 
+   * @returns json
+   */
+  const checkDuplicates = async (username: string) => {
     try {
-      const res = await fetch('./api/accounts', {
-        method: "GET",
+      const account = await fetch(`${URL}/api/accounts?` + new URLSearchParams(
+        {
+          username
+        }), {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-      })
+      }).then((res) => res.json())
 
-      return res.json()
+      return account
     } catch (error) {
       console.log(error)
     }
 
   }
+  /**
+   * 
+   * @param e 
+   */
   const submitButton = async (e: any) => {
     e.preventDefault();
 
-    const user = checkDuplicates(username)
-
+    setdup(false)
     try {
+      await checkDuplicates(username)
+      setdup(true)
+
+
+    } catch (error) {
+
+      console.log(error)
+
       const res = await fetch('/api/accounts', {
         method: "POST",
         headers: {
@@ -61,11 +81,7 @@ export default function Page() {
 
       router.push('/')
       console.log("submitted")
-
-    } catch (error) {
-      console.log(error)
     }
-
 
   }
 
