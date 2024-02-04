@@ -30,11 +30,22 @@ export default function Page() {
                     'Content-Type': 'application/json',
                 },
             }).then((res) => res.json())
-            if (!findAccount.account.username) { setuserValid(true) } else { setuserValid(false) }
+            // UM WHAAAT?????
+            // im so confused why does this work cause the try catch catches the error and set the user= True
+            // which makes the error message display.
+            // IM SO CONFUSED
+            // if (!findAccount.account.username) { setuserValid(true) }
+            // else {
+            //     setuserValid(false)
+            // }
+
+
+
             // console.log(typeof(findAccount.account))
             return findAccount
-        } catch (Error) {
-            console.log(Error)
+        } catch (error) {
+            //why this work??????????????
+            console.log(error)
         }
     }
 
@@ -42,13 +53,21 @@ export default function Page() {
 
     const submitButton = async (e: any) => {
         e.preventDefault()
-        const {user}= await getAccount(username)
-        console.log(user)
-        // if (user.account.password != password){
-        //     setpassValid(true)
-        // }else{
-        //     router.push(`./${username}`)
-        // }
+        const user = await getAccount(username)
+        try {
+            setuserValid(false)
+            if (user.account.password != password) {
+                setpassValid(true)
+            } else {
+                setpassValid(false)
+                router.push( `./${username}`)
+            }
+            console.log(user.account.password)
+        } catch (error) {
+            setuserValid(true)
+            console.log("username not found")
+        }
+
 
         console.log(`username: ${username} password: ${password}`)
 

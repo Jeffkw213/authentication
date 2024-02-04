@@ -21,20 +21,24 @@ export default function Page() {
 
   const router = useRouter()
   const checkDuplicates = async (username: String) => {
-    try{
+    try {
       const res = await fetch('./api/accounts', {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
         },
       })
-    }catch(error){
+
+      return res.json()
+    } catch (error) {
       console.log(error)
     }
 
   }
   const submitButton = async (e: any) => {
     e.preventDefault();
+
+    const user = checkDuplicates(username)
 
     try {
       const res = await fetch('/api/accounts', {
@@ -50,6 +54,10 @@ export default function Page() {
           email
         })
       })
+
+      if (!res.ok) {
+        throw new Error("Failed to update")
+      }
 
       router.push('/')
       console.log("submitted")
