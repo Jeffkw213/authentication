@@ -8,20 +8,20 @@ import connectMongoDB from "@/libs/mongodb"
  * @returns NextResponse.json
  * 
  * URL Params use of Error handling
- */ 
+ */
 export async function GET(req: NextRequest) {
     // await new Promise(resolve => setTimeout(resolve, 2000));
     // console.log(req)
     const searchParams = req.nextUrl.searchParams
-    const username = searchParams.get('username') 
-    if (!username){
-        return NextResponse.json({ error: 'Bad Request' }, { status: 400 })
+    const username = searchParams.get('username')
+    if (!username) {
+        return NextResponse.json({ JSON: 'Bad Request' }, { status: 400 })
     }
-    console.log(username)
+    // console.log(username)
     await connectMongoDB()
     const account = await Account.findOne({ username })
-    if (!account) {return NextResponse.json({ error: 'User Not Found' }, { status: 404 })}
-    return NextResponse.json({ account }, { status: 200 })
+    if (!account) { return NextResponse.json({ JSON: 'User Not Found' }, { status: 404 }) }
+    return NextResponse.json({ account }, { status: 302 })
 }
 /**
  * 
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
  */
 
 export async function POST(req: Request) {
-    const { username, first, last, email, password  } = await req.json()
+    const { username, first, last, email, password } = await req.json()
     await connectMongoDB()
     await Account.create({
         username,

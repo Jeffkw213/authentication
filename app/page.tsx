@@ -5,28 +5,8 @@ import { Button } from '@nextui-org/button';
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
+const URL = "http://localhost:3000/"
 
-// save accounts that are logged in local. Website needs to know who is logged in.
-
-const getAccount = async (username: string) => {
-    console.log(`SEARCHING FOR ${username}`)
-    try {
-        const findAccount = await fetch('/api/accounts?' + new URLSearchParams(
-            {
-                username
-            }), {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-
-        }).then((res) => res.json())
-        console.log(findAccount.account.first)
-
-    } catch (Error) {
-        console.log(Error)
-    }
-}
 
 export default function Page() {
 
@@ -36,35 +16,44 @@ export default function Page() {
     const [passValid, setpassValid] = useState(false)
     const router = useRouter()
 
+    // save accounts that are logged in local. Website needs to know who is logged in.
 
-
-    const validUser = (username: String, password: String) => {
-        //if username exists in database: 
-        // check if the the password is correct
-        if (true) {
-            if (true) {
-                return true
-            }
-            setpassValid(true)
+    const getAccount = async (username: string) => {
+        console.log(`SEARCHING FOR ${username}`)
+        try {
+            const findAccount = await fetch(`${URL}/api/accounts?` + new URLSearchParams(
+                {
+                    username
+                }), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((res) => res.json())
+            if (!findAccount.account.username) { setuserValid(true) } else { setuserValid(false) }
+            // console.log(typeof(findAccount.account))
+            return findAccount
+        } catch (Error) {
+            console.log(Error)
         }
-        setuserValid(true)
-        return false
     }
 
-    const correctPass = (username: String, password: String) => {
-        return false
-    }
-    function submitButton(e: any) {
+
+
+    const submitButton = async (e: any) => {
         e.preventDefault()
-        if (validUser(username, password)) {
-            router.push(`./${username}`)
-        } else {
-            console.log("account not found")
-        }
+        const {user}= await getAccount(username)
+        console.log(user)
+        // if (user.account.password != password){
+        //     setpassValid(true)
+        // }else{
+        //     router.push(`./${username}`)
+        // }
+
         console.log(`username: ${username} password: ${password}`)
 
     }
-    getAccount("user1")
+
     return (
         <Card>
             <CardHeader className="flex gap-3 w-96">
@@ -87,7 +76,7 @@ export default function Page() {
                         value={username}
                         variant="bordered"
                         isInvalid={userValid}
-                        errorMessage={userValid && "Please enter a valid email"}
+                        errorMessage={userValid && "username not found"}
                         onChange={(e) => { setUsername(e.target.value) }}
                         onClear={() => { setUsername("") }}
                     />
@@ -97,7 +86,7 @@ export default function Page() {
                         value={password}
                         variant="bordered"
                         isInvalid={passValid}
-                        errorMessage={passValid && "Please enter a valid email"}
+                        errorMessage={passValid && "Invalid Password"}
                         onChange={(e) => { setPassword(e.target.value) }}
                         onClear={() => { setPassword("") }}
                     />

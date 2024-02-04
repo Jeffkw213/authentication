@@ -17,12 +17,48 @@ export default function Page() {
   const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
 
-  const router = useRouter()
+  const [dup, setdup] = useState(false)
 
-  const submitButton = (e:any) => {
+  const router = useRouter()
+  const checkDuplicates = async (username: String) => {
+    try{
+      const res = await fetch('./api/accounts', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    }catch(error){
+      console.log(error)
+    }
+
+  }
+  const submitButton = async (e: any) => {
     e.preventDefault();
-    router.push('/')
-    console.log("submitted")
+
+    try {
+      const res = await fetch('/api/accounts', {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          name,
+          last,
+          email
+        })
+      })
+
+      router.push('/')
+      console.log("submitted")
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
   }
 
   return (
@@ -46,19 +82,25 @@ export default function Page() {
         <form onSubmit={submitButton} className='flex flex-col'>
           <Input isRequired isClearable label="Username"
             value={username}
+            variant="bordered"
+            isInvalid={dup}
             onChange={(e) => { setUsername(e.target.value) }}
             onClear={() => setUsername("")}
           />
 
-          
+
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 py-4">
             <Input isRequired isClearable label="Name"
               value={name}
+              variant="bordered"
+
               onChange={(e) => { setName(e.target.value) }}
               onClear={() => setName("")}
             />
             <Input isRequired isClearable label="Last Name"
               value={last}
+              variant="bordered"
+
               onChange={(e) => { setLast(e.target.value) }}
               onClear={() => setLast("")}
             />
@@ -66,11 +108,15 @@ export default function Page() {
 
           <Input isRequired isClearable label="Password"
             value={password}
+            variant="bordered"
+
             onChange={(e) => { setPassword(e.target.value) }}
             onClear={() => setPassword("")}
           />
           <Input isRequired isClearable className='py-4' type="email" label="Email" placeholder="Enter your email"
             value={email}
+            variant="bordered"
+
             onChange={(e) => { setEmail(e.target.value) }}
             onClear={() => setEmail("")}
           />
