@@ -53,13 +53,16 @@ export default function Page() {
 
     setdup(false)
     try {
-      await checkDuplicates(username)
-      setdup(true)
+      const user = await checkDuplicates(username)
+      if (user.account.username == username) {
+        setdup(true)
+      }
 
 
     } catch (error) {
 
       console.log(error)
+      setdup(false)
 
       const res = await fetch('/api/accounts', {
         method: "POST",
