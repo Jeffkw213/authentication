@@ -14,7 +14,7 @@ const URL = "http://localhost:3000/"
 export default function Page() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
+  const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
 
@@ -50,7 +50,7 @@ export default function Page() {
    */
   const submitButton = async (e: any) => {
     e.preventDefault();
-
+    //if username is found in the database then do not POST the account
     setdup(false)
     try {
       const user = await checkDuplicates(username)
@@ -71,10 +71,10 @@ export default function Page() {
         },
         body: JSON.stringify({
           username,
-          password,
-          name,
+          first,
           last,
-          email
+          email,
+          password
         })
       })
 
@@ -118,11 +118,11 @@ export default function Page() {
 
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 py-4">
             <Input isRequired isClearable label="Name"
-              value={name}
+              value={first}
               variant="bordered"
 
-              onChange={(e) => { setName(e.target.value) }}
-              onClear={() => setName("")}
+              onChange={(e) => { setFirst(e.target.value) }}
+              onClear={() => setFirst("")}
             />
             <Input isRequired isClearable label="Last Name"
               value={last}

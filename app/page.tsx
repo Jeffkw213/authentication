@@ -61,7 +61,7 @@ export default function Page() {
                 setpassValid(true)
             } else {
                 setpassValid(false)
-                router.push( `./${username}`)
+                router.push( `./${user.account._id}`)
             }
             console.log(user.account.password)
 
