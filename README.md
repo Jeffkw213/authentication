@@ -49,7 +49,7 @@ This is an authentication app that provides users to login, logout, and register
 git clone https://github.com/Jeffkw213/authentication.git
 cd authentication
 ```
-3. Create an `.env` file in the root directory with [MongoDB]([https://www.mongodb.com/basics/create-database](https://www.mongodb.com/docs/cloud-manager/tutorial/connect-to-mongodb/#:~:text=To%20connect%20to%20a%20MongoDB,port%20for%20the%20mongos%20process.))
+3. Create an `.env` file in the root directory with [MongoDB](https://www.mongodb.com/docs/cloud-manager/tutorial/connect-to-mongodb/#:~:text=To%20connect%20to%20a%20MongoDB,port%20for%20the%20mongos%20process.)
 ```
 MONGODB_URI=""
 ```
