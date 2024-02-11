@@ -44,5 +44,20 @@ This is an authentication app that provides users to login, logout, and register
 
 ## Build
 1. Install Node.js
-2. 
-
+2. Clone repository
+```
+git clone https://github.com/Jeffkw213/authentication.git
+cd authentication
+```
+3. Create an `.env` file in the root directory with [MongoDB](#https://www.mongodb.com/basics/create-database)
+```
+MONGODB_URI=""
+```
+4. Install npm
+```
+npm install
+```
+5. Run the development server:
+```
+npm run dev
+```
