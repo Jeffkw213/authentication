@@ -24,3 +24,11 @@ This is an authentication app that provides users to login, logout, and register
 ![image](https://github.com/Jeffkw213/authentication/assets/55030995/b42b8f5b-a029-41cc-922c-4646f59db46f)
 
 
+## Username not found:
+![image](https://github.com/Jeffkw213/authentication/assets/55030995/51ce9bf1-ffc4-4094-92f2-d18b6e40f643)
+
+## Wrong Password
+![image](https://github.com/Jeffkw213/authentication/assets/55030995/20a96e83-6b62-46a6-8b04-958580a07995)
+
+## Duplicated Username:
+![image](https://github.com/Jeffkw213/authentication/assets/55030995/bbef211a-7669-4351-8c65-d288bcc12585)
