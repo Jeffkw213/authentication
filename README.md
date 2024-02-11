@@ -1,4 +1,8 @@
 # Authentication App
+
+## Table of Content:
+-(#Overview)
+
 ## Overview 
 
 This is an authentication app that provides users to login, logout, and register. It ensures that the credentials are proper and correct.
