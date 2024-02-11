@@ -7,7 +7,7 @@
 - [Tech](#Tech)
 - [Build](#Build)
 
-##Screenshots
+## Screenshots
 ## Login:
 ![image](https://github.com/Jeffkw213/authentication/assets/55030995/71d1dccc-c358-4270-ac29-77e0c8409212)
 
