@@ -49,7 +49,7 @@ This is an authentication app that provides users to login, logout, and register
 git clone https://github.com/Jeffkw213/authentication.git
 cd authentication
 ```
-3. Create an `.env` file in the root directory with [MongoDB](#https://www.mongodb.com/basics/create-database)
+3. Create an `.env` file in the root directory with [MongoDB](https://www.mongodb.com/basics/create-database)
 ```
 MONGODB_URI=""
 ```
@@ -61,3 +61,9 @@ npm install
 ```
 npm run dev
 ```
+
+## License
+This project is made available under the terms of MIT License 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
