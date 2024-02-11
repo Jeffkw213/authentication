@@ -13,4 +13,14 @@ This is an authentication app that provides users to login, logout, and register
 - Database: MongoDB
 - Frontend: Nextjs, NextUI
 
+
+## Login:
 ![image](https://github.com/Jeffkw213/authentication/assets/55030995/71d1dccc-c358-4270-ac29-77e0c8409212)
+
+## Register:
+![image](https://github.com/Jeffkw213/authentication/assets/55030995/e07c1182-bf3a-409e-97b3-68bf3360942a)
+
+## Once Logged In:
+![image](https://github.com/Jeffkw213/authentication/assets/55030995/b42b8f5b-a029-41cc-922c-4646f59db46f)
+
+
