@@ -30,21 +30,8 @@ export default function Page() {
                     'Content-Type': 'application/json',
                 },
             }).then((res) => res.json())
-            // UM WHAAAT?????
-            // im so confused why does this work cause the try catch catches the error and set the user= True
-            // which makes the error message display.
-            // IM SO CONFUSED
-            // if (!findAccount.account.username) { setuserValid(true) }
-            // else {
-            //     setuserValid(false)
-            // }
-
-
-
-            // console.log(typeof(findAccount.account))
             return findAccount
         } catch (error) {
-            //why this work??????????????
             console.log(error)
         }
     }
@@ -63,7 +50,6 @@ export default function Page() {
                 setpassValid(false)
                 router.push( `./${user.account._id}`)
             }
-            console.log(user.account.password)
 
             //error 404 user does not exist in the database
         } catch (error) {
@@ -72,7 +58,6 @@ export default function Page() {
         }
 
 
-        console.log(`username: ${username} password: ${password}`)
 
     }
 

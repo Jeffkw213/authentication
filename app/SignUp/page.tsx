@@ -61,7 +61,6 @@ export default function Page() {
 
     } catch (error) {
 
-      console.log(error)
       setdup(false)
 
       const res = await fetch('/api/accounts', {
