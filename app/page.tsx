@@ -87,8 +87,8 @@ export default function Page() {
                     width={70}
                 />
                 <div className="flex flex-col">
-                    <p className="text-md">Trying out some Authentication stuff</p>
-                    <p className="text-small text-default-500">Fuck You</p>
+                    <p className="text-md">Login</p>
+                    <p className="text-small text-default-500"> Welcome </p>
                 </div>
             </CardHeader>
             <Divider />

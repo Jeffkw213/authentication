@@ -100,8 +100,8 @@ export default function Page() {
           width={70}
         />
         <div className="flex flex-col">
-          <p className="text-md">This is something new and trying out new things</p>
-          <p className="text-small text-default-500">Fuck You</p>
+          <p className="text-md">Create a New Account</p>
+          <p className="text-small text-default-500">New User</p>
         </div>
       </CardHeader>
       <Divider />
